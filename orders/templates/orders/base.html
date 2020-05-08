@@ -11,6 +11,14 @@
 		<a href="/" class="logo">My Store</a>
 	</div>
 	<div id="subheader">
+		<span class="user">
+		{% if request.user.is_authenticated %}
+			Hello {{ request.user.first_name }},
+			<a href="{% url "logout" %}">Logout</a>
+		{% else %}
+			<a href="{% url "login" %}">Log-in</a>
+		{% endif %}
+		</span>
 		<div class="cart">
 		{% with total_items=cart|length %}
 			{% if total_items > 0 %}

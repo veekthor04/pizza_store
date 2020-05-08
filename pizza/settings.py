@@ -33,6 +33,7 @@ CART_SESSION_ID = 'cart'
 # Application definition
 
 INSTALLED_APPS = [
+    'account.apps.AccountConfig',
     'checkedout.apps.CheckedoutConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
@@ -130,3 +131,7 @@ EMAIL_HOST_USER = 'adenugavictor04@gmail.com'
 EMAIL_HOST_PASSWORD = 'adenuga04__'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
