@@ -15,11 +15,14 @@
 			</a>
 		</h2>
 		<p class="price">${{ product.price }}</p>
+		<p>Alert Special Pizza Offer!!!: Select five or more toppings and get 5% off</p> 
+		{{ product.description|linebreaks }}
+	</div>
+	<div id="side">
 		<form action="{% url 'cart:cart_add' product.id %}" method="post">
 		{{ cart_product_form }}
 		{% csrf_token %}
 			<input type="submit" value="Add to cart">
 		</form>
-		{{ product.description|linebreaks }}
 	</div>
 {% endblock %}

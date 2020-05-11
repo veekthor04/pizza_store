@@ -1,12 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu);
+{% load static %}
 
-body { 
+
+body {
     margin:0;
     padding:0;
-    font-family:helvetica, sans-serif; 
+    font-family:helvetica, sans-serif;
 }
 
-h1, h2, h3, h4, h5 , h6 { 
+h1, h2, h3, h4, h5 , h6 {
     font-family: 'Ubuntu', sans-serif; font-weight:normal;
 }
 
@@ -44,7 +46,7 @@ a.button.light {
 table {
     width:100%;
     border-spacing:0;
-    border-collapse: collapse; 
+    border-collapse: collapse;
 }
 
 table th, table td {
@@ -111,7 +113,7 @@ ul.errorlist {
    color:#ff0000;
    clear:both;
    font-size:13px;
-   margin:0; 
+   margin:0;
    padding:0;
 }
 
@@ -180,7 +182,7 @@ ul.errorlist {
 #main {
     float:left;
     width: 96%;
-    margin-right:-220px; 
+    margin-right:-220px;
     overflow:hidden;
 }
 
@@ -194,7 +196,7 @@ ul.errorlist {
 
 .product-list .item img {
     width:100%;
-    margin-bottom:8px;
+    margin-bottom:8px                                                                     ;
 }
 
 .product-detail {
@@ -327,4 +329,7 @@ form div.field {
     background:#efefef;
     color:#666;
     border-radius:4px;
+}
+#side{
+  clear:both;
 }

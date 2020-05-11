@@ -12,6 +12,10 @@ Checkout
 		{% for item in cart %}
 			<li>
 			{{ item.quantity }}x {{ item.product.name }}
+			topping:
+			{% for topping in item.topping_list %}
+				{{ topping }}
+			{% endfor %}
 				<span>${{ item.total_price }}</span>
 			</li>
 		{% endfor %}

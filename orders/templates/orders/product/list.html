@@ -23,6 +23,8 @@
 		<h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
 		{% for product in products %}
 		<div class="item">
+			<a href="{{ product.get_absolute_url }}">
+				<img src="{% if product.category|slugify == 'pizza' %} {% static 'img/pizza.png' %} {% elif product.category|slugify  == 'subs' %} {% static 'img/subs.png' %} {% else %} {% static 'img/blank.png' %}{% endif %}"></a>
 			<a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
 		${{ product.price }}
 		</div>

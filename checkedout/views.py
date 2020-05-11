@@ -13,7 +13,11 @@ def order_create(request):
 		if form.is_valid():
 			order = form.save()
 			for item in cart:
-				OrderItem.objects.create(order=order, product=item['product'], price=item['price'], quantity=item['quantity'])
+				toppings = ''
+				if len(item['topping_list'])>0:
+					for value in item['topping_list']:
+						toppings+= value + ' '
+				OrderItem.objects.create(order=order, product=item['product'], price=item['total_price'], quantity=item['quantity'], topping = toppings)
 			# clear the cart
 			cart.clear()
 			# launch asynchronous task

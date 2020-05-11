@@ -11,16 +11,27 @@ class Cart(object):
 			# save an empty cart in the session
 			cart = self.session[settings.CART_SESSION_ID] = {}
 		self.cart = cart
-	
-	def add(self, product, quantity=1, override_quantity=False):
+
+	def add(self, product, topping, quantity=1, override_quantity=False):
+		topping_list = []
+		topping_price = Decimal(0)
+		if topping.count() != 0:
+			print(topping)
+			for value in topping:
+				topping_list.append(value.name)
+				topping_price += value.price
+		if len(topping_list) >=5:
+			topping_list.append("(Special Offer!)")
 		#Add a product to the cart or update its quantity.
 		product_id = str(product.id)
 		if product_id not in self.cart:
-			self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}
+			self.cart[product_id] = {'quantity': 0,'topping_list': topping_list,'topping_price':str(topping_price), 'price': str(product.price)}
 		if override_quantity:
 			self.cart[product_id]['quantity'] = quantity
 		else:
 			self.cart[product_id]['quantity'] += quantity
+			self.cart[product_id]['topping_list'] = topping_list
+			self.cart[product_id]['topping_price'] = str(topping_price)
 		self.save()
 
 	def save(self):
@@ -44,7 +55,10 @@ class Cart(object):
 			cart[str(product.id)]['product'] = product
 		for item in cart.values():
 			item['price'] = Decimal(item['price'])
-			item['total_price'] = item['price'] * item['quantity']
+			if len(item['topping_list']) >=6:
+				item['total_price'] = round((((item['price'] + Decimal(item['topping_price'])) * item['quantity'])* Decimal(0.95)),2)
+			else:
+				item['total_price'] = ((item['price'] + Decimal(item['topping_price'])) * item['quantity'])
 			yield item
 
 	def __len__(self):
@@ -52,7 +66,13 @@ class Cart(object):
 		return sum(item['quantity'] for item in self.cart.values())
 
 	def get_total_price(self):
-		return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+		total=[]
+		for item in self.cart.values():
+			if len(item['topping_list']) >=6:
+				total.append(round((((Decimal(item['price']) + Decimal(item['topping_price'])) * item['quantity'])* Decimal(0.95)),2))
+			else:
+				total.append(((Decimal(item['price']) + Decimal(item['topping_price'])) * item['quantity']))
+		return sum(total)
 
 	def clear(self):
 		# remove cart from session
