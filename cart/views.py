@@ -2,16 +2,21 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from orders.models import Product
 from .cart import Cart
-from .forms import CartAddProductForm
+from .forms import CartAddProductForm, CartAddProductForm1
 
 # Create your views here.
 @require_POST
 def cart_add(request, product_id):
 	cart = Cart(request)
 	product = get_object_or_404(Product, id=product_id)
-	form = CartAddProductForm(request.POST)
+	if (str(product.category) == 'pizza'):
+		form = CartAddProductForm1(request.POST)
+	else:
+		form = CartAddProductForm(request.POST)
 	if form.is_valid():
 		cd = form.cleaned_data
+		if (str(product.category) != 'pizza'):
+			cd['topping'] = None
 		cart.add(product=product, topping=cd['topping'], quantity=cd['quantity'], override_quantity=cd['override'])
 	return redirect('cart:cart_detail')
 

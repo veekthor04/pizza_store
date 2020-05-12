@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product, Topping
-from cart.forms import CartAddProductForm
+from cart.forms import CartAddProductForm, CartAddProductForm1
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -24,7 +24,11 @@ def product_list(request, category_slug=None):
 @login_required
 def product_detail(request, id, slug):
 	product = get_object_or_404(Product, id=id, slug=slug, available=True)
-	cart_product_form = CartAddProductForm()
+	print(product.category)
+	if (str(product.category) == 'pizza'):
+		cart_product_form = CartAddProductForm1()
+	else:
+		cart_product_form = CartAddProductForm()
 	context = {
 		'product': product,
 		'cart_product_form': cart_product_form

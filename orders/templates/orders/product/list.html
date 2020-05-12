@@ -24,7 +24,7 @@
 		{% for product in products %}
 		<div class="item">
 			<a href="{{ product.get_absolute_url }}">
-				<img src="{% if product.category|slugify == 'pizza' %} {% static 'img/pizza.png' %} {% elif product.category|slugify  == 'subs' %} {% static 'img/subs.png' %} {% else %} {% static 'img/blank.png' %}{% endif %}"></a>
+				<img src="{% if product.category|slugify == 'pizza' %} {% static 'img/pizza.png' %} {% elif product.category|slugify  == 'subs' %} {% static 'img/subs.png' %} {% elif product.category|slugify  == 'salads' %} {% static 'img/salad.jpg' %} {% elif product.category|slugify  == 'pasta' %} {% static 'img/pasta.jpg' %} {% elif product.category|slugify  == 'dinner platters' %} {% static 'img/dinner.jpg' %} {% else %} {% static 'img/blank.png' %}{% endif %}"></a>
 			<a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
 		${{ product.price }}
 		</div>

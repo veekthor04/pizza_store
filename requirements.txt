@@ -1,1 +1,6 @@
-Django==2.0.3
+os
+sys
+celery
+django
+datetime
+csv

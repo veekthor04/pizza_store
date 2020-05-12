@@ -7,7 +7,7 @@
 
 {% block content %}
 	<div class="product-detail">
-		<img src="{% if product.category|slugify == 'pizza' %} {% static 'img/pizza.png' %} {% elif product.category|slugify  == 'subs' %} {% static 'img/subs.png' %} {% else %} {% static 'img/blank.png' %}{% endif %}">
+		<img src="{% if product.category|slugify == 'pizza' %} {% static 'img/pizza.png' %} {% elif product.category|slugify  == 'subs' %} {% static 'img/subs.png' %} {% elif product.category|slugify  == 'salads' %} {% static 'img/salad.jpg' %} {% elif product.category|slugify  == 'pasta' %} {% static 'img/pasta.jpg' %} {% elif product.category|slugify  == 'dinner platters' %} {% static 'img/dinner.jpg' %} {% else %} {% static 'img/blank.png' %}{% endif %}">
 		<h1>{{ product.name }}</h1>
 		<h2>
 			<a href="{{ product.category.get_absolute_url }}">
@@ -15,7 +15,9 @@
 			</a>
 		</h2>
 		<p class="price">${{ product.price }}</p>
-		<p>Alert Special Pizza Offer!!!: Select five or more toppings and get 5% off</p> 
+		{% if product.category|slugify == 'pizza' %}
+		<p>Alert Special Pizza Offer!!!: Select five or more toppings and get 5% off</p>
+		{% endif %}
 		{{ product.description|linebreaks }}
 	</div>
 	<div id="side">

@@ -15,13 +15,14 @@ class Cart(object):
 	def add(self, product, topping, quantity=1, override_quantity=False):
 		topping_list = []
 		topping_price = Decimal(0)
-		if topping.count() != 0:
-			print(topping)
-			for value in topping:
-				topping_list.append(value.name)
-				topping_price += value.price
+		if topping != None:
+			if topping.count() != 0:
+				print(topping)
+				for value in topping:
+					topping_list.append(value.name)
+					topping_price += value.price
 		if len(topping_list) >=5:
-			topping_list.append("(Special Offer!)")
+			topping_list.append("(Special Pizza!)")
 		#Add a product to the cart or update its quantity.
 		product_id = str(product.id)
 		if product_id not in self.cart:
