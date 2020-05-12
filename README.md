@@ -16,9 +16,9 @@ the admin can view and print order details via '/admin/checkedout/order/'
 Personal Touch: the app supports sending users a confirmation email once their 
 purchase is complete.
 
-Environmental used variables are:
-EMAIL_HOST
-EMAIL_HOST_USER
+Environmental variables used are:
+EMAIL_HOST,
+EMAIL_HOST_USER,
 EMAIL_HOST_PASSWORD
 
 
